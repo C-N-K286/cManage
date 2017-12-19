@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+	<title>Classes</title>
+	<meta charset="utf-8">
+	<meta name="author" content="pixelhint.com">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/class/reset.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/class/main.css' %}">
+</head>
+<body>
+		<header>
+				<div class="wrapper">
+					<nav>
+						<ul class="main_nav">
+								<li><a href="{% url 'business:dashboard' %}">Back</a></li>
+							<li><a href="{% url 'business:addClass' %}">Add Class</a></li>
+						</ul>
+					</nav>
+				</div>
+			</header><!-- Header End -->	
+	<section class="main wrapper">
+		{% for i in list %}
+		<article>
+			<div class="article_image">
+				<a href="/business/details/{{i.class_id}}">
+					<!--img src="{% static 'images/class/pic1.jpg' %}" alt="" title=""-->
+				</a>
+			</div>
+			<div class="post">
+				<h1 class="title">
+					<a href="/business/details/{{i.class_id}}">{{i.class_name}} </a>
+					<ul >
+						<li><font size="3">start date:{{ i.start_date }}</font></li>
+						<li><font size ="3">end date:{{ i.end_date }}</font></li>
+						
+					</ul>
+				</h1>				
+			</div>
+		</article>
+		{% endfor %}
+	</section>
+</body>
+</html>

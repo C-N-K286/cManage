@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+	<title>Classes</title>
+	<meta charset="utf-8">
+	<meta name="author" content="pixelhint.com">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/class/reset.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/class/main.css' %}">
+</head>
+<body>
+		<header>
+				<div class="wrapper">
+					<nav>
+						<ul class="main_nav">
+								<li><a href="{% url 'business:mInstructor' %}">Back</a></li>
+							<!--li><a href="/business/update/{{list.class_id}}">Update Class</a></li-->
+							<li><a href="/business/deleteInstructor/{{list.instructor_id}}">Delete Instructor</a></li>
+						</ul>
+					</nav>
+				</div>
+			</header><!-- Header End -->
+	<h2><center>Instructor Details</center></h2>		
+	<section class="main wrapper">
+		<article>
+			<div class="post">
+				<h1 class="title">
+						Instructor Name      : {{list.first_name}} {{list.middle_name}} {{list.last_name}}<br>   
+				</h1>
+				address                : {{list.address}}<br>
+				email                  : {{list.email}}<br>
+				Social Service Number  : {{list.end_date}}<br>
+				telephone              : {{list.telephone}}
+				
+			</div>
+		</article>
+	</section>
+</body>
+</html>

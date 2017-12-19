@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+	<title>Instructors</title>
+	<meta charset="utf-8">
+	<meta name="author" content="pixelhint.com">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/class/reset.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/class/main.css' %}">
+</head>
+<body>
+		<header>
+				<div class="wrapper">
+					<nav>
+						<ul class="main_nav">
+								<li><a href="{% url 'business:dashboard' %}">Back</a></li>
+							<li><a href="{% url 'business:addInstructor' %}">Add Instructor</a></li>
+						</ul>
+					</nav>
+				</div>
+			</header><!-- Header End -->	
+	<section class="main wrapper">
+		{% for i in list %}
+		<article>
+			<div class="post">
+				<h1 class="title">
+					<a href="/business/instructordetails/{{i.instructor_id}}">{{i.first_name}} {{i.middle_name}} {{i.last_name}}</a>
+					<ul >
+						<li><font size="3">address:{{ i.address }}</font></li>
+						<li><font size ="3">telephone number:{{ i.telephone }}</font></li>
+						
+					</ul>
+				</h1>				
+			</div>
+		</article>
+		{% endfor %}
+	</section>
+</body>
+</html>
