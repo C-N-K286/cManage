@@ -46,7 +46,7 @@ def dashboard(request):
         return redirect('/business/login')
     else:
         
-        return render(request,'business/dashboard.html',{'username':request.user.username})
+        return render(request,'business/dashboard/dashboard.html',{'username':request.user.username})
 
 def login_user(request):
     if not request.user.is_authenticated():
