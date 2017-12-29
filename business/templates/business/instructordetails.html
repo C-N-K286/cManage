@@ -1,0 +1,24 @@
+{% extends 'business/dashboard/base.html'%}
+{% load static %}
+{% block nav %}
+		  <li><a href="{% url 'business:mInstructor' %}">Back</a></li>
+		  <li><a href="/business/deleteInstructor/{{list.instructor_id}}">Delete</a></li>
+  {% endblock %}
+{% block body %}
+	<h3><center>Instructor Details</center></h3>		
+	<section class="main wrapper">
+		<article>
+			<div class="post thumbnail">
+				<h3 class="title ">
+						Instructor Name      : {{list.first_name}} {{list.middle_name}} {{list.last_name}}<br>   
+				</h3>
+				<ul class="list-group">
+				<li class="list-group-item">	address                : {{list.address}}</li>
+				<li class="list-group-item">email                  : {{list.email}}</li>
+				<li class="list-group-item">Social Security Number  : {{list.end_date}}</li>
+				<li class="list-group-item">telephone              : {{list.telephone}}</li>
+			</ul>
+			</div>
+		</article>
+	</section>
+{% endblock %}
