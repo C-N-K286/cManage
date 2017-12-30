@@ -248,13 +248,19 @@ def details(request,cid):
     else:
         classdetails = Class.objects.get(class_id = cid)
         return render(request,'business/details.html',{'list':classdetails})
-		
 def instructordetails(request,iid):
     if not request.user.is_authenticated():
         return login_user(request)
     else:
         instructordetails = Instructor.objects.get(instructor_id = iid)
-        return render(request,'business/instructordetails.html',{'list':instructordetails})
+        if request.method == "POST":
+            subject = request.POST.get('subject')
+            matter = request.POST.get('matter')
+            email = EmailMessage(
+                subject,matter,request.user.email,[instructordetails.email]
+            )
+            email.send()
+        return render(request,'business/instructordetails.html',{'list':instructordetails,'user':request.user})
 
 
 def update(request,cid):
