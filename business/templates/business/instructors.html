@@ -1,5 +1,12 @@
 {% extends 'business/dashboard/base.html'%}
 {% load static %}
+{% block nav %}
+	<li>
+	<a href="{% url 'business:addInstructor' %}">
+		<p>Add Instructor</p>
+	</a>
+</li>
+{% endblock %}
 {% block body %}
 		<!--<header>
 				<div class="wrapper">

@@ -21,6 +21,8 @@ from django.core.mail import EmailMessage
 import json
 from django.core import serializers
 from django.core.serializers.json import DjangoJSONEncoder
+
+
 def checkClass(request,cid):
     cla = Class.objects.get(class_id=cid)
     print cla.business_id
@@ -200,16 +202,33 @@ def addInstructor(request):
         return redirect('/business/login')
     else:
         if request.method=="POST":
-            email = request.POST.get('email')
+            '''email = request.POST.get('email')
             subject, from_email, to = 'hello',email, email
             text_content = 'Registration'
             html_content = str(get_current_site(request))+"/business/regInstructor/"+str(request.user.pk)+"/"
             msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
             msg.attach_alternative(html_content, "text/html")
             msg.send()
+            return redirect('/business/emails/manageInstructor')'''
+            username = request.POST.get('username')
+            email = request.POST.get('toEmail')
+            subject = request.POST.get('subject')
+            matter = request.POST.get('matter')
+            current_site = get_current_site(request)
+            mail_subject = 'Activate your Business account.'
+            message = render_to_string('business/emails/notification.html',{
+                'username':username,
+                'domain':current_site.domain,
+                'matter':matter,
+                'user' :request.user.pk
+            })
+            email = EmailMessage(
+                        subject, message,request.user.email,[email]
+            )
+            email.send()
             return redirect('/business/manageInstructor')
         else:
-            return render(request,'business/mailInst.html')
+            return render(request,'business/emails/mailInst.html')
 def RegInstructor(request,uid):
     form = InstructorForm(request.POST)
     print form
