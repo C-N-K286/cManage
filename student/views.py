@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
 from django.shortcuts import render,redirect
@@ -21,19 +20,29 @@ def dashboard(request):
     if not request.user.is_authenticated():
         return redirect('/student/login')
     else:
-        clas = Class.objects.all()
-        username = request.user.username
-        return render(request,'student/dashboard/dashboard.html',{'class':clas,'username':username})
+        try:
+            print request.user.student.student_id
+            clas = Class.objects.all()
+            username = request.user.username
+            return render(request,'student/dashboard/dashboard.html',{'class':clas,'username':username})
+        except:
+            logout(request)
+            return redirect('/student/login') 
 
 def search(request):
     if not request.user.is_authenticated():
         return redirect('/student/login')
     else:
-        if request.method == "POST":
-            qname = request.POST.get('qname',False)
-        clas = Class.objects.filter(class_name__contains = qname)
-        username = request.user.username
-        return render(request,'student/dashboard.html',{'class':clas,'username':username})
+        try:
+            print request.user.student.student_id
+            if request.method == "POST":
+                qname = request.POST.get('qname',False)
+            clas = Class.objects.filter(class_name__contains = qname)
+            username = request.user.username
+            return render(request,'student/dashboard/dashboard.html',{'class':clas,'username':username})
+        except:
+            logout(request)
+            return redirect('/student/login') 
 
 def login_user(request):
     if not request.user.is_authenticated():
@@ -50,7 +59,7 @@ def login_user(request):
                         return redirect('/student/dashboard')
                     except:
                         logout(request)
-                        return HttpResponse("<br><br><br><br><br><h1><center>Student Login Blocked!!<br> You own your business</center></h1>")
+                        return HttpResponse("<br><br><br><br><br><h1><center>Student Login Blocked!!<br> You own your student</center></h1>")
                 else:
                     return render(request,'student/login.html')
             else:
@@ -64,6 +73,16 @@ def logout_user(request):
     logout(request)
     return redirect('/student/login')
 
+def bUser(request):
+    if not request.user.is_authenticated():
+        return redirect('/student/login')
+    else:
+        try:
+            print request.user.student.student_id
+            return render(request,'student/dashboard/user.html',{'user':request.user})
+        except:
+            logout(request)
+            return redirect('/student/login')
 def register(request):
     if not request.user.is_authenticated():
         user_form = UserForm(request.POST)
@@ -121,35 +140,41 @@ def display(request):
     if not request.user.is_authenticated():
         return redirect('/student/login')
     else:
-        enrol = []  
-        c = Class.objects.all()
-        for i in c:
-            for j in i.student.all():
-                if j.student_id == request.user.student.student_id:
-                    enrol.append(i)            			
+        try:
+            print request.user.student.student_id 		
+            enrol = []  
+            c = Class.objects.all()
+            for i in c:
+                for j in i.student.all():
+                    if j.student_id == request.user.student.student_id:
+                        enrol.append(i)            			
          
-        return render(request,'student/enroll.html',{'list':enrol})
-		
+            return render(request,'student/enroll.html',{'list':enrol})
+        except:
+            logout_user(requset)
 		
 def enroll(request,cid):
     if not request.user.is_authenticated():
         return redirect('/student/login') 
     else:
-        if request.method == 'POST':
-            p1 = Student.objects.get(student_id = request.user.student.student_id)
-            a1 = Class.objects.get(class_id = cid)  
-            a1.student.add(p1)
-            a1.save()
-            return redirect('/student/dashboard/')
+        try:
+            print request.user.student.student_id 		
+            if request.method == 'POST':
+                p1 = Student.objects.get(student_id = request.user.student.student_id)
+                a1 = Class.objects.get(class_id = cid)  
+                a1.student.add(p1)
+                a1.save()
+                return redirect('/student/dashboard/')
+        except:
+            logout_user(requset)
         
 def details(request,cid):
     if not request.user.is_authenticated():
         return redirect('/student/login') 
     else:
-        classdetails = Class.objects.get(class_id = cid)
-        return render(request,'student/details.html',{'list':classdetails})
-def bUser(request):
-    if not request.user.is_authenticated():
-        return redirect('/student/login')
-    else:
-        return render(request,'student/dashboard/user.html',{'user':request.user})
+        try:
+            print request.user.student.student_id 		
+            classdetails = Class.objects.get(class_id = cid)
+            return render(request,'student/details.html',{'list':classdetails})
+        except:
+            logout_user(request)
