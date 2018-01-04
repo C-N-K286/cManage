@@ -23,7 +23,7 @@ def dashboard(request):
     else:
         clas = Class.objects.all()
         username = request.user.username
-        return render(request,'student/dashboard.html',{'class':clas,'username':username})
+        return render(request,'student/dashboard/dashboard.html',{'class':clas,'username':username})
 
 def search(request):
     if not request.user.is_authenticated():
@@ -148,3 +148,8 @@ def details(request,cid):
     else:
         classdetails = Class.objects.get(class_id = cid)
         return render(request,'student/details.html',{'list':classdetails})
+def bUser(request):
+    if not request.user.is_authenticated():
+        return redirect('/student/login')
+    else:
+        return render(request,'student/dashboard/user.html',{'user':request.user})
