@@ -1,0 +1,41 @@
+{% extends 'business/dashboard/base.html'%}
+{% load static %}
+
+{% block nav %}
+<li class="dropdown">
+		<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+			  <p>
+				  options
+				  <b class="caret"></b>
+			  </p>
+
+		</a>
+		<ul class="dropdown-menu">
+		  <li><a href="/business/update/{{list.class_id}}">Update class</a></li>
+		  <li><a href="/business/clone/{{list.class_id}}">Clone class</a></li>
+		  <li><a href="/business/delete/{{list.class_id}}">Delete class</a></li>
+		</ul>
+  </li>
+{% endblock %}
+{% block body %}
+
+		
+	<h2><center>Class Details</center></h2>		
+	<section class="main wrapper">
+		<article>
+			<div class="post">
+				<h1 class="title">
+						{{list.class_name_variable}}      : {{list.class_name}}<br>   
+				</h1>
+				Course Duration                          : {{list.corse_duration}}<br>
+                {{list.start_date_variable}}             : {{list.start_date}}<br>
+				{{list.end_date_variable}}               : {{list.end_date}}<br>
+				{{list.class_location_variable}}         : {{list.class_location}}<br>
+				{{list.allocated_room_variable}}         : {{list.allocated_room}}<br>
+				{{list.instructor_variable}}             : {{list.instructor}}<br>
+				{{list.description_variable}}            : {{list.description}}
+				
+			</div>
+		</article>
+	</section>
+{% endblock %}

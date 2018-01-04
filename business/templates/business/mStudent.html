@@ -1,0 +1,54 @@
+{% extends 'business/dashboard/base.html'%}
+{% load static %}
+
+{% block style %}
+#p2{
+margin-top:-25px !important;
+margin-bottom:-25px !important;
+}
+
+{% endblock %}
+
+
+{% block nav-left %}
+<form class="navbar-form navbar-left" role="search" action="{% url 'business:search' %}" method="post">
+                                    {% csrf_token %}
+                                    <div class="form-group" id="p2">
+                                          <input type="text" class="form-control" name="qname" placeholder="Enter Class Name" id="p3">
+                                    <button class="icon"><i class="fa fa-search"></i></button>
+                                    </div>
+                            </form>
+
+{% endblock %}
+
+{% block body %}
+
+        <div class="container" id="godown">
+                {% for key,values in list.items %}
+                    <div class="thumbnail">
+                       <p id="{key.class_name}}" class="toggle">{{key.class_name}}
+                        <div class="conatiner toggle"   >
+                            <ul class="list-group">
+                                {% for j in values %}
+                               <a href="/business/sDetails/{{j.student.student_id}}/{{key.class_id}}"> <li class="list-group-item list-group-item-success">{{j.username}}</li></a>
+                                {%endfor%}
+                            </ul>
+                        </div>
+                    </p>
+                    </div>
+                {% endfor %}
+        </div>
+        {% endblock %}
+        {% block js%}
+        <script src="{% static 'js/dashboard/jquery.js'%}"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+        
+         $("p.toggle").click(function(e){
+            e.preventDefault();
+        $(this).next("div").toggle();
+            });
+        </script>
+        {% endblock %}

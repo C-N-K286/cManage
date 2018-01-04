@@ -1,0 +1,48 @@
+{% extends 'business/dashboard/base.html'%}
+{% load static %}
+
+{% block style %}
+#p2{
+margin-top:-25px !important;
+margin-bottom:-25px !important;
+}
+
+{% endblock %}
+
+
+{% block nav-left %}
+<form class="navbar-form navbar-left" role="search" action="{% url 'business:msearch' %}" method="post">
+                                    {% csrf_token %}
+                                    <div class="form-group" id="p2">
+                                          <input type="text" class="form-control" name="qname" placeholder="Enter Instructor Name" id="p3">
+                                    <button class="icon"><i class="fa fa-search"></i></button>
+                                    </div>
+                            </form>
+
+{% endblock %}
+
+{% block nav %}
+	<li>
+	<a href="{% url 'business:addInstructor' %}">
+		<p>Add Instructor</p>
+	</a>
+</li>
+{% endblock %}
+{% block body %}
+	<section class="main wrapper">
+		{% for i in list %}
+		<article>
+			<div class="post thumbnail col-sm-8 centre">
+				<h3 class="title ">
+					<a href="/business/instructordetails/{{i.instructor_id}}">{{i.first_name}} {{i.middle_name}} {{i.last_name}}</a>
+					
+				</h1>	
+				<ul class="list-group">
+						<li class="list-group-item"><font size="3">address:{{ i.address }}</font></li>
+						<li class="list-group-item"><font size ="3">telephone number:{{ i.telephone }}</font></li>
+					</ul>			
+			</div>
+		</article>
+		{% endfor %}
+	</section>
+{% endblock %}

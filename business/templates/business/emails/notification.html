@@ -1,0 +1,7 @@
+{% autoescape off %}
+Hi {{ username }},
+
+{{matter}}
+Please click on the link to confirm your registration,
+http://{{ domain }}{% url 'business:RegInstructor' uid=user %}
+{% endautoescape %}
