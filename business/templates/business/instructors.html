@@ -1,5 +1,29 @@
 {% extends 'business/dashboard/base.html'%}
 {% load static %}
+<<<<<<< HEAD
+=======
+
+{% block style %}
+#p2{
+margin-top:-25px !important;
+margin-bottom:-25px !important;
+}
+
+{% endblock %}
+
+
+{% block nav-left %}
+<form class="navbar-form navbar-left" role="search" action="{% url 'business:msearch' %}" method="post">
+                                    {% csrf_token %}
+                                    <div class="form-group" id="p2">
+                                          <input type="text" class="form-control" name="qname" placeholder="Enter Instructor Name" id="p3">
+                                    <button class="icon"><i class="fa fa-search"></i></button>
+                                    </div>
+                            </form>
+
+{% endblock %}
+
+>>>>>>> dbbfffd1c4188f935f01bc76dda88bbbd4e6509b
 {% block nav %}
 	<li>
 	<a href="{% url 'business:addInstructor' %}">

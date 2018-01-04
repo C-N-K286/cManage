@@ -19,6 +19,7 @@ urlpatterns = [
     url(r'^regInstructor/(?P<uid>[0-9]+)/',views.RegInstructor,name='RegInstructor'),
     url(r'^manageInstructor/',views.mInstructor,name='mInstructor'),
     url(r'^addInstructor/',views.addInstructor,name='addInstructor'),
+<<<<<<< HEAD
     url(r'^deleteInstructor/(?P<iid>[0-999]+)/',views.deleteInstructor,name='deleteInstructor'),
     url(r'^instructordetails/(?P<iid>[0-999]+)/',views.instructordetails,name='instructordetails'), 
     url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
@@ -26,4 +27,15 @@ urlpatterns = [
     url(r'^clone/(?P<cid>[0-999]+)/',views.clone,name="clone"),
 	url(r'^calendar/',views.calendar,name='calendar'),
     url(r'^search/',views.search,name='search'),
+=======
+    url(r'^deleteInstructor/(?P<iid>[0-9]+)/',views.deleteInstructor,name='deleteInstructor'),
+    url(r'^instructordetails/(?P<iid>[0-9]+)/',views.instructordetails,name='instructordetails'), 
+    url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
+        views.activate, name='activate'),
+    url(r'^clone/(?P<cid>[0-9]+)/',views.clone,name="clone"),
+	url(r'^calendar/',views.calendar,name='calendar'),
+    url(r'^search/',views.search,name='search'),
+    url(r'^csearch/',views.csearch,name='csearch'),
+    url(r'^msearch/',views.msearch,name='msearch'),
+>>>>>>> dbbfffd1c4188f935f01bc76dda88bbbd4e6509b
 ]
