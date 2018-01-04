@@ -21,7 +21,6 @@ def dashboard(request):
     if not request.user.is_authenticated():
         return redirect('/student/login')
     else:
-<<<<<<< HEAD
         try:
             print request.user.student.student_id
             clas = Class.objects.all()
@@ -30,17 +29,11 @@ def dashboard(request):
         except:
             logout(request)
             return redirect('/student/login') 
-=======
-        clas = Class.objects.all()
-        username = request.user.username
-        return render(request,'student/dashboard.html',{'class':clas,'username':username})
 
->>>>>>> dbbfffd1c4188f935f01bc76dda88bbbd4e6509b
 def search(request):
     if not request.user.is_authenticated():
         return redirect('/student/login')
     else:
-<<<<<<< HEAD
         try:
             print request.user.student.student_id
             if request.method == "POST":
@@ -51,13 +44,6 @@ def search(request):
         except:
             logout(request)
             return redirect('/student/login') 
-=======
-        if request.method == "POST":
-            qname = request.POST.get('qname',False)
-        clas = Class.objects.filter(class_name__contains = qname)
-        username = request.user.username
-        return render(request,'student/dashboard.html',{'class':clas,'username':username})
->>>>>>> dbbfffd1c4188f935f01bc76dda88bbbd4e6509b
 
 def login_user(request):
     if not request.user.is_authenticated():
@@ -145,7 +131,6 @@ def display(request):
     if not request.user.is_authenticated():
         return redirect('/student/login')
     else:
-<<<<<<< HEAD
         try:
             print request.user.student.student_id 		
             enrol = []  
@@ -158,23 +143,11 @@ def display(request):
             return render(request,'student/enroll.html',{'list':enrol})
         except:
             logout_user(requset)
-=======
-        enrol = []  
-        c = Class.objects.all()
-        for i in c:
-            for j in i.student.all():
-                if j.student_id == request.user.student.student_id:
-                    enrol.append(i)            			
-         
-        return render(request,'student/enroll.html',{'list':enrol})
-		
->>>>>>> dbbfffd1c4188f935f01bc76dda88bbbd4e6509b
 		
 def enroll(request,cid):
     if not request.user.is_authenticated():
         return redirect('/student/login') 
     else:
-<<<<<<< HEAD
         try:
             print request.user.student.student_id 		
             if request.method == 'POST':
@@ -185,20 +158,11 @@ def enroll(request,cid):
                 return redirect('/student/dashboard/')
         except:
             logout_user(requset)
-=======
-        if request.method == 'POST':
-            p1 = Student.objects.get(student_id = request.user.student.student_id)
-            a1 = Class.objects.get(class_id = cid)  
-            a1.student.add(p1)
-            a1.save()
-            return redirect('/student/dashboard/')
->>>>>>> dbbfffd1c4188f935f01bc76dda88bbbd4e6509b
         
 def details(request,cid):
     if not request.user.is_authenticated():
         return redirect('/student/login') 
     else:
-<<<<<<< HEAD
         try:
             print request.user.student.student_id 		
             classdetails = Class.objects.get(class_id = cid)
@@ -206,7 +170,3 @@ def details(request,cid):
         except:
             logout_user(requset)
         
-=======
-        classdetails = Class.objects.get(class_id = cid)
-        return render(request,'student/details.html',{'list':classdetails})
->>>>>>> dbbfffd1c4188f935f01bc76dda88bbbd4e6509b

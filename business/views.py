@@ -47,31 +47,22 @@ def dashboard(request):
     if not request.user.is_authenticated():
         return redirect('/business/login')
     else:
-<<<<<<< HEAD
         try:
             print request.user.business.business_id
             return render(request,'business/dashboard/dashboard.html',{'username':request.user.username})
         except:
             logout(request)
             return redirect('/business/login')
-=======
-        
-        return render(request,'business/dashboard/dashboard.html',{'username':request.user.username})
->>>>>>> dbbfffd1c4188f935f01bc76dda88bbbd4e6509b
 def bUser(request):
     if not request.user.is_authenticated():
         return redirect('/business/login')
     else:
-<<<<<<< HEAD
         try:
             print request.user.business.business_id
             return render(request,'business/dashboard/user.html',{'user':request.user})
         except:
             logout(request)
             return redirect('/business/login')
-=======
-        return render(request,'business/dashboard/user.html',{'user':request.user})
->>>>>>> dbbfffd1c4188f935f01bc76dda88bbbd4e6509b
 def login_user(request):
     if not request.user.is_authenticated():
         if request.method == "POST":
@@ -116,8 +107,6 @@ def mClass(request):
             cur_list=[]
         return render(request,'business/classes.html',{'list':cur_list})
 
-<<<<<<< HEAD
-=======
 def csearch(request):
     if not request.user.is_authenticated():
         return redirect('/student/login')
@@ -138,7 +127,6 @@ def csearch(request):
             cur_list=[]
         return render(request,'business/classes.html',{'list':cur_list})
         
->>>>>>> dbbfffd1c4188f935f01bc76dda88bbbd4e6509b
 def mInstructor(request):
     if not request.user.is_authenticated():
         return redirect('/business/login')
@@ -153,8 +141,6 @@ def mInstructor(request):
             cur_list=[]
         return render(request,'business/instructors.html',{'list':cur_list})
 
-<<<<<<< HEAD
-=======
 def msearch(request):
     if not request.user.is_authenticated():
         return redirect('/business/login')
@@ -185,7 +171,6 @@ def msearch(request):
             cur_list=[]
         return render(request,'business/instructors.html',{'list':cur_list})
 
->>>>>>> dbbfffd1c4188f935f01bc76dda88bbbd4e6509b
 def register(request):
     if not request.user.is_authenticated():
         user_form = UserForm(request.POST)
@@ -246,7 +231,6 @@ def addClass(request):
     if not request.user.is_authenticated():
         return login_user(request)
     else:
-<<<<<<< HEAD
         try:
             print request.user.business.business_id
             form = ClassForm(request.POST)
@@ -260,23 +244,11 @@ def addClass(request):
             return render(request , 'business/CreateClass.html')
         except:
             logout_user(request)
-=======
-        form = ClassForm(request.POST)
-        if form.is_valid():
-            obj = form.save(commit=False)
-            obj.corse_duration = datetime.timedelta(hours=60)
-            obj.duration = datetime.timedelta(days=10)
-            obj.business_id = Business.objects.get(business_id = request.user.business.business_id)
-            obj.save()
-            return mClass(request)
-        return render(request , 'business/CreateClass.html')
->>>>>>> dbbfffd1c4188f935f01bc76dda88bbbd4e6509b
 
 def clone(request,cid):
     if not request.user.is_authenticated():
         return login_user(request)
     else:
-<<<<<<< HEAD
         try:
             print request.user.business.business_id
             form = ClassForm(request.POST)
@@ -290,24 +262,12 @@ def clone(request,cid):
             return render(request, 'business/cloneClass.html' , {'obj':Class.objects.get(class_id = cid)})
         except:
             logout_user(request)
-=======
-        form = ClassForm(request.POST)
-        if form.is_valid():
-            obj = form.save(commit=False)
-            obj.corse_duration = datetime.timedelta(hours=60)
-            obj.duration = datetime.timedelta(days=10)
-            obj.business_id = Business.objects.get(business_id = request.user.business.business_id)
-            obj.save()
-            return redirect('/business/manage')
-        return render(request, 'business/cloneClass.html' , {'obj':Class.objects.get(class_id = cid)})
->>>>>>> dbbfffd1c4188f935f01bc76dda88bbbd4e6509b
 
 
 def addInstructor(request):
     if not request.user.is_authenticated():
         return redirect('/business/login')
     else:
-<<<<<<< HEAD
         try:
             print request.user.business.business_id
             if request.method=="POST":
@@ -340,36 +300,6 @@ def addInstructor(request):
                 return render(request,'business/emails/mailInst.html')
         except:
             logout_user(request)		
-=======
-        if request.method=="POST":
-            '''email = request.POST.get('email')
-            subject, from_email, to = 'hello',email, email
-            text_content = 'Registration'
-            html_content = str(get_current_site(request))+"/business/regInstructor/"+str(request.user.pk)+"/"
-            msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
-            msg.attach_alternative(html_content, "text/html")
-            msg.send()
-            return redirect('/business/emails/manageInstructor')'''
-            username = request.POST.get('username')
-            email = request.POST.get('toEmail')
-            subject = request.POST.get('subject')
-            matter = request.POST.get('matter')
-            current_site = get_current_site(request)
-            mail_subject = 'Activate your Business account.'
-            message = render_to_string('business/emails/notification.html',{
-                'username':username,
-                'domain':current_site.domain,
-                'matter':matter,
-                'user' :request.user.pk
-            })
-            email = EmailMessage(
-                        subject, message,request.user.email,[email]
-            )
-            email.send()
-            return redirect('/business/manageInstructor')
-        else:
-            return render(request,'business/emails/mailInst.html')
->>>>>>> dbbfffd1c4188f935f01bc76dda88bbbd4e6509b
 def RegInstructor(request,uid):
     form = InstructorForm(request.POST)
     print form
@@ -387,22 +317,17 @@ def details(request,cid):
     if not request.user.is_authenticated():
         return login_user(request)
     else:
-<<<<<<< HEAD
         try:
             print request.user.business.business_id
             classdetails = Class.objects.get(class_id = cid)
             return render(request,'business/details.html',{'list':classdetails})
         except:
             logout_user(request)
-=======
-        classdetails = Class.objects.get(class_id = cid)
-        return render(request,'business/details.html',{'list':classdetails})
->>>>>>> dbbfffd1c4188f935f01bc76dda88bbbd4e6509b
+
 def instructordetails(request,iid):
     if not request.user.is_authenticated():
         return login_user(request)
     else:
-<<<<<<< HEAD
         try:
             print request.user.business.business_id
             instructordetails = Instructor.objects.get(instructor_id = iid)
@@ -417,23 +342,11 @@ def instructordetails(request,iid):
             return render(request,'business/instructordetails.html',{'list':instructordetails,'user':request.user})
         except:
             logout_user(request)
-=======
-        instructordetails = Instructor.objects.get(instructor_id = iid)
-        if request.method == "POST":
-            subject = request.POST.get('subject')
-            matter = request.POST.get('matter')
-            email = EmailMessage(
-                subject,matter,request.user.email,[instructordetails.email]
-            )
-            email.send()
-        return render(request,'business/instructordetails.html',{'list':instructordetails,'user':request.user})
->>>>>>> dbbfffd1c4188f935f01bc76dda88bbbd4e6509b
 
 
 def update(request,cid):
     if not request.user.is_authenticated():
         return login_user(request)
-<<<<<<< HEAD
     else:
         try:
             print request.user.business.business_id
@@ -494,70 +407,10 @@ def update(request,cid):
         except:
             logout_user(request)
 
-				
-=======
-    elif request.method == 'POST':
-        name = request.POST['class_name']
-        sdate = request.POST['start']
-        edate = request.POST['end']		
-        location = request.POST['clocation']
-        room = request.POST['croom']
-        ins = request.POST['instructor']
-        des = request.POST['desp']
-        c_vari = request.POST['class_variable']
-        s_vari = request.POST['start_variable']
-        e_vari = request.POST['end_variable']		
-        loc_vari = request.POST['location_variable']
-        room_vari = request.POST['room_variable']
-        ins_vari = request.POST['instructor_variable']
-        des_vari = request.POST['description_variable']
-		
-        
-        a = Class.objects.get( class_id = cid)
-        temp =	a
-        if name!= '' :
-            temp.class_name = name
-        if sdate!= '':
-            temp.start_date = sdate
-        if edate != '':
-            temp.end_date = edate
-        if location != '':
-            temp.class_location = location
-        if room != '':
-            temp.allocated_room = room
-        if ins != '':
-            temp.instructor = ins
-        if des != '':
-            temp.description = des
-
-        if c_vari!= '' :
-            temp.class_name_variable = c_vari
-        if s_vari!= '':
-            temp.start_date_variable = s_vari
-        if e_vari != '':
-            temp.end_date_variable = e_vari
-        if loc_vari != '':
-            temp.class_location_variable = loc_vari
-        if room_vari != '':
-            temp.allocated_room_variable = room_vari
-        if ins_vari != '':
-            temp.instructor_variable = ins_vari
-        if des_vari != '':
-            temp.description_variable = des_vari
-			
-        temp.save()
-        return render(request,'business/details.html',{'list':temp})			
-    else:
-        basic = Class.objects.get( class_id = cid )
-        temp1 = basic
-        return render(request,'business/update.html', {'list':temp1})		
-		
->>>>>>> dbbfffd1c4188f935f01bc76dda88bbbd4e6509b
 def delete(request,cid):
     if not request.user.is_authenticated():
         return redirect('/business/login')
     else:
-<<<<<<< HEAD
         try:
             print request.user.business.business_id           		
             a = Class.objects.get( class_id = cid)
@@ -566,12 +419,10 @@ def delete(request,cid):
         except:
             logout_user(request)
          
-=======
         a = Class.objects.get( class_id = cid)
         a.delete()
         return redirect('/business/manage')
    
->>>>>>> dbbfffd1c4188f935f01bc76dda88bbbd4e6509b
 def deleteInstructor(request,iid):
     a = Instructor.objects.get(instructor_id = iid)
     a.delete()
@@ -635,7 +486,6 @@ def sDetails(request,studentid,cid):
     if not request.user.is_authenticated():
         return redirect('/business/login')
     else:
-<<<<<<< HEAD
         try:
             print request.user.business.business_id
             x= checkClass(request,cid)
@@ -650,24 +500,11 @@ def sDetails(request,studentid,cid):
                 return redirect('/business/manageStudents/')
         except:
             logout_user(request)		
-=======
-        x= checkClass(request,cid)
-        y = checkStudent(request,cid,studentid)
-        if x ==1 and y==1:
-            print 'working'
-            student = Student.objects.get(student_id=studentid)
-            clas = Class.objects.get(class_id = cid)
-            user =student.user
-            return render(request,'business/sDetails.html',{'user':user,'class':clas})
-        else:
-            return redirect('/business/manageStudents/')
->>>>>>> dbbfffd1c4188f935f01bc76dda88bbbd4e6509b
 
 def sDelete(request,studentid,cid):
     if not request.user.is_authenticated():
         return redirect('/business/login')
     else:
-<<<<<<< HEAD
         try:
             print request.user.business.business_id
             x= checkClass(request,cid)
@@ -684,19 +521,6 @@ def sDelete(request,studentid,cid):
         except:
             logout_user(request)		
       
-=======
-        x= checkClass(request,cid)
-        y = checkStudent(request,cid,studentid)
-        if x ==1 and y==1:
-            print studentid,cid
-            student = Student.objects.get(student_id=studentid)
-            clas = Class.objects.get(class_id = cid)
-            clas.student.remove(student)
-            clas.save()
-            return redirect('/business/manageStudents')
-        else:
-            return redirect('/business/manageStudents/')
->>>>>>> dbbfffd1c4188f935f01bc76dda88bbbd4e6509b
 def parseJ(lis):
     qset = []
     for i in lis:

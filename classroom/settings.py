@@ -127,9 +127,5 @@ EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'nikhilkumar.c16@iiits.in'
 EMAIL_HOST_PASSWORD = '8143765408'
-<<<<<<< HEAD
 EMAIL_PORT = 587
 
-=======
-EMAIL_PORT = 587
->>>>>>> dbbfffd1c4188f935f01bc76dda88bbbd4e6509b
