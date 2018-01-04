@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+<head>
+<meta charset='utf-8' />
+<link href="{% static 'css/calendar/fullcalendar.min.css' %}" rel="stylesheet" >
+<link href="{% static 'css/calendar/fullcalendar.print.min.css' %}" rel="stylesheet" media='print' >
+
+<script src="{% static 'js/lib/moment.min.js' %}"></script>
+<script src="{% static 'js/lib/jquery.min.js' %}"></script>
+<script src="{% static 'js/lib/fullcalendar.min.js' %}"></script>
+
+
+<script>
+	var arr=[];
+	var dat =  new Date().toISOString().slice(0,10);
+	console.log(dat);
+		function func(x,y,z)
+		{
+			console.log(x)
+			arr.push({'title':x,'start':y+"T08:00:00",'end':z+'T10:00:00','allDay':false,'defaultTimedEventDuration':'00:30:00'});
+		}
+		console.log(arr);
+	$(document).ready(function() {
+
+		$('#calendar').fullCalendar({
+			header: {
+				left: 'prev,next today',
+				center: 'title',
+				right: 'month,agendaWeek,agendaDay'
+			},
+			defaultDate: dat,
+			navLinks: true, // can click day/week names to navigate views
+			selectable: true,
+			forceEventDuration:true,
+			allDay:false,
+			selectHelper: true,
+			
+			select: function(start, end) {
+				var title = prompt('Event Title:');
+				var eventData;
+				if (title) {
+					eventData = {
+						title: title,
+						start: start,
+						end: end,
+						
+					};
+					$('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
+				}
+				$('#calendar').fullCalendar('unselect');
+			},
+			editable: true,
+			eventLimit: true, // allow "more" link when too many events
+			durationEditable:true,
+			defaultAllDayEventDuration:true,
+			defaultTimedEventDuration:'00:30:00',
+			events: arr
+		});
+		
+	});
+	
+</script>
+<style>
+
+	body {
+		margin: 40px 10px;
+		padding: 0;
+		font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+		font-size: 14px;
+	}
+
+	#calendar {
+		max-width: 900px;
+		margin: 0 auto;
+	}
+
+</style>
+</head>
+<body>
+	{% for i in list %}
+
+	<script type="text/javascript">
+	func('{{i.class_name}}','{{i.start_date| date:"Y-m-d"}}','{{i.end_date| date:"Y-m-d"}}');
+	</script>
+	{% endfor %}
+	<div id='calendar'></div>
+
+</body>
+</html>

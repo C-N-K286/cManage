@@ -1,0 +1,29 @@
+{% extends 'business/dashboard/base.html'%}
+{% load static %}
+{% block body %}
+<div style="padding:100px">
+    <div class="col-md-2">
+
+    </div>
+<form action="" method ="POST" class="form-group col-md-8" >
+    {% csrf_token %}
+    <input type="email" placeholder="email" name="email" class="form-control" value="something@gmail.com" disabled>
+    <br>
+    <input type="text" placeholder="UserName" name="username" class="form-control">
+    <br>
+    <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            <input id="email" type="text" class="form-control" name="toEmail" placeholder="Email">
+    </div>
+    <br>
+    <input type="text" placeholder="Regarding" name="subject" class="form-control">
+    <br>
+    <textarea class="form-control"  placeholder="matter" name="matter" rows="5" id="Matter"></textarea>
+    <br>
+    <input type="submit" value="submit" class="btn btn-success form-control">
+</form><div>
+        <div class="col-md-2">
+        </div>
+
+</div>
+{% endblock %}

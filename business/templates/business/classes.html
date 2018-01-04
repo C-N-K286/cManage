@@ -1,0 +1,31 @@
+{% extends 'business/dashboard/base.html'%}
+{% load static %}
+{% block nav %}
+	<li>
+        <a href="{% url 'business:addClass' %}">
+            <p>Add Class</p>
+        </a>
+    </li>
+{% endblock %}
+{% block body %}	
+	<section class="main wrapper">
+		{% for i in list %}
+		<article>
+			<div class="article_image">
+				<a href="/business/details/{{i.class_id}}">
+				</a>
+			</div>
+			<div class="post">
+				<h1 class="title">
+					<a href="/business/details/{{i.class_id}}">{{i.class_name}} </a>
+					<ul class="list-group">
+						<li class="list-group-item"><font size="3">start date:{{ i.start_date }}</font></li>
+						<li class="list-group-item"><font size ="3">end date:{{ i.end_date }}</font></li>
+						
+					</ul>
+				</h1>				
+			</div>
+		</article>
+		{% endfor %}
+	</section>
+{% endblock %}

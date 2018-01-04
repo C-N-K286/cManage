@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+  <link href="{% static 'css/CreateClass.css' %}" rel='stylesheet' type='text/css'/>
+    <link href="//fonts.googleapis.com/css?family=Ropa+Sans:400,400i&amp;subset=latin-ext" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Simple Tab Forms Widget Responsive, Login Form Web Template, Flat Pricing Tables, Flat Drop-Downs, Sign-Up Web Templates, Flat Web Templates, Login Sign-up Responsive Web Template, Smartphone Compatible Web Template, Free Web Designs for Nokia, Samsung, LG, Sony Ericsson, Motorola Web Design" />
+    <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css'>
+    <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/3.1.3/css/bootstrap-datetimepicker.min.css'>
+    <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
+    
+<style>
+  @media (min-width: 1200px) {
+    .container{
+        max-width: 500px;
+    }
+  .size
+  {
+    max_width:500px;
+  }
+}
+</style>
+</head>
+<body>
+  <h1>Clone Class</h1>
+  <div class="container">
+  <form action="#" method="post">
+    {% csrf_token %}
+    <div class="form-group">
+      <input type="text" placeholder="ClassName" name="class_name" required="" value="{{obj.class_name}}">
+    </div>
+    <div class="form-group">
+      <div class='input-group date size' id='datetimepicker1' >
+        <input type='text' class="form-control" name="start_date" value="{{obj.start_date| date:'Y-m-d'}}" />
+        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+        </span>
+      </div>
+    </div>
+    <div class="form-group" >
+      <div class='input-group date size' id='datetimepicker1'>
+        <input type='text' class="form-control" name="end_date" value="{{obj.end_date| date:'Y-m-d'}}" />
+        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+        </span>
+      </div>
+    </div>
+    <div class="form-group">
+      <input type="text" placeholder="Location" name="class_location" required="" value="{{obj.class_location}}">
+    </div>
+    <div class="form-group">
+      <input type="text" placeholder="Room No" name="allocated_room" required="" value="{{obj.allocated_room}}">
+    </div>
+    <div class="form-group">
+      <input type="text" placeholder="Instructor" name="instructor" required="" value="{{obj.instructor}}">
+    </div>
+    <div class="form-group">
+      <textarea class="form-control" rows="5" id="comment" name="description">{{obj.description}}</textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+  <script src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js'></script>
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.min.js'></script>
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/3.1.3/js/bootstrap-datetimepicker.min.js'></script>
+  <script  src="{% static 'js/date.js' %}"></script>
+</body>
+</html>

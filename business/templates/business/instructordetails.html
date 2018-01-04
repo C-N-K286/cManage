@@ -1,0 +1,67 @@
+{% extends 'business/dashboard/base.html'%}
+{% load static %}
+{% block nav %}
+		  <li><a href="{% url 'business:mInstructor' %}">Back</a></li>
+		  <li><a href="/business/deleteInstructor/{{list.instructor_id}}">Delete</a></li>
+  {% endblock %}
+    <!-- Modal -->
+	{% block modal %}
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog" role="document">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<h4 class="modal-title" id="myModalLabel">Email</h4>
+		  </div>
+		  <div class="modal-body">
+				<form action="" method ="POST" class="form-group" >
+						{% csrf_token %}
+						<input type="email" placeholder="email" name="email" class="form-control" value="{{user.email}}" disabled>
+						<br>
+						<input type="text" placeholder="UserName" name="username" class="form-control" value="{{list.first_name}} {{list.middle_name}} {{list.last_name}}">
+						<br>
+						<div class="input-group">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+								<input id="email" type="text" class="form-control" name="toEmail" placeholder="Email" value="{{list.email}}">
+						</div>
+						<br>
+						<input type="text" placeholder="Regarding" name="subject" class="form-control">
+						<br>
+						<textarea class="form-control"  placeholder="matter" name="matter" rows="5" id="Matter"></textarea>
+						
+					
+		  </div>
+		  <div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			<input type="submit" value="submit" class="btn btn-success">
+		  </div>
+		</form>
+		</div>
+	  </div>
+	</div>
+	{% endblock %}
+{% block body %}
+	<h3><center>Instructor Details</center></h3>		
+	<section class="main wrapper">
+		<article>
+			<div class="post thumbnail">
+				<h3 class="title ">
+						Instructor Name      : {{list.first_name}} {{list.middle_name}} {{list.last_name}}<br>   
+				</h3>
+				<ul class="list-group">
+				<li class="list-group-item">	address                : {{list.address}}</li>
+				<li class="list-group-item">email                  : {{list.email}}</li>
+				<li class="list-group-item">Social Security Number  : {{list.end_date}}</li>
+				<li class="list-group-item">telephone              : {{list.telephone}}</li>
+			</ul>
+			<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+			Send Email
+			</button>
+			</div>
+			<!-- Button trigger modal -->
+
+  
+
+		</article>
+	</section>
+{% endblock %}
