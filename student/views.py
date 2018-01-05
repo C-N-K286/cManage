@@ -178,3 +178,32 @@ def details(request,cid):
             return render(request,'student/details.html',{'list':classdetails})
         except:
             logout_user(request)
+
+def parseJ(lis):
+    qset = []
+    for i in lis:
+        var = i.get_date().split(",")
+        qset.append(str({str('name'):str(var[0]),str('start_date'):str(var[1]),str('end_date'):str(var[2])}))
+    print qset
+    return qset
+
+def calendar(request):
+    if not request.user.is_authenticated():
+        return redirect('/student/login')
+    else:
+        try:
+            cur_id = request.user.student.student_id
+        except:
+            return redirect('/student/logout')
+        try:
+            print request.user.student.student_id 		
+            cur_list = []  
+            c = Class.objects.all()
+            for i in c:
+                for j in i.student.all():
+                    if j.student_id == cur_id:
+                        cur_list.append(i)            			
+        except:
+            cur_list=[]
+        cList=parseJ(cur_list)
+        return render(request,'student/selectable.html',{'list':cur_list})

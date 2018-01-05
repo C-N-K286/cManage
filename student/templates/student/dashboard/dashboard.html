@@ -2,6 +2,26 @@
     {% extends 'student/dashboard/base.html'%}
     {% load static %}
 {% block body %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+                <div class="">
+                
+                        <div class="container" id='available'>
+                                <h3>Available Classes</h3>
+                                {% for i in class %}
+                                    <div class="thumbnail well well-lg">
+                                        <a href="/student/details/{{i.class_id}}"><h3>{{ i.class_name }}</h3></a>
+                                        <h5>{{i.start_date}}</h5>
+                                        <h5>{{i.end_date}}</h5>
+                                    </div>
+                                {% endfor %} 
+                                
+                        </div>
+                    </div>
+        </div>
+    </div>
+</div>
 <!---
         <div class="content">
             <div class="container-fluid">
