@@ -7,6 +7,12 @@ margin-top:-25px !important;
 margin-bottom:-25px !important;
 }
 
+#met:hover{
+	background:#D8E2F9;
+	-webkit-transform: scale(1.02);
+            transform: scale(1.02);
+}
+
 {% endblock %}
 
 
@@ -29,24 +35,24 @@ margin-bottom:-25px !important;
     </li>
 {% endblock %}
 {% block body %}	
-	<section class="main wrapper">
-		{% for i in list %}
-		<article>
-			<div class="article_image">
-				<a href="/business/details/{{i.class_id}}">
-				</a>
-			</div>
-			<div class="post">
-				<h1 class="title">
-					<a href="/business/details/{{i.class_id}}">{{i.class_name}} </a>
-					<ul class="list-group">
-						<li class="list-group-item"><font size="3">start date:{{ i.start_date }}</font></li>
-						<li class="list-group-item"><font size ="3">end date:{{ i.end_date }}</font></li>
-						
-					</ul>
-				</h1>				
-			</div>
-		</article>
-		{% endfor %}
-	</section>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+                <div class="">
+                
+                        <div class="container" id='available'>
+                                {% for i in list %}
+                                    <div class="thumbnail well well-lg" id="met">
+                                        <a href="/business/details/{{i.class_id}}"><h3>{{ i.class_name }}</h3></a>
+                                        <h5>{{i.start_date}}</h5>
+                                        <h5>{{i.end_date}}</h5>
+                                    </div>
+                                {% endfor %} 
+                                
+                        </div>
+                    </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

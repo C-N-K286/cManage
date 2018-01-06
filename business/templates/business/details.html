@@ -19,23 +19,27 @@
 {% endblock %}
 {% block body %}
 
-		
-	<h2><center>Class Details</center></h2>		
+
 	<section class="main wrapper">
 		<article>
-			<div class="post">
-				<h1 class="title">
+			<div class="post thumbnail">
+				<h3 class="title ">
 						{{list.class_name_variable}}      : {{list.class_name}}<br>   
-				</h1>
-				Course Duration                          : {{list.corse_duration}}<br>
-                {{list.start_date_variable}}             : {{list.start_date}}<br>
-				{{list.end_date_variable}}               : {{list.end_date}}<br>
-				{{list.class_location_variable}}         : {{list.class_location}}<br>
-				{{list.allocated_room_variable}}         : {{list.allocated_room}}<br>
-				{{list.instructor_variable}}             : {{list.instructor}}<br>
-				{{list.description_variable}}            : {{list.description}}
-				
+				</h3>
+				<ul class="list-group">
+				<li class="list-group-item">Course Duration                          : {{list.corse_duration}}</li>
+				<li class="list-group-item">{{list.start_date_variable}}             : {{list.start_date}}</li>
+				<li class="list-group-item">{{list.end_date_variable}}               : {{list.end_date}}</li>
+				<li class="list-group-item">{{list.class_location_variable}}         : {{list.class_location}}</li>
+				<li class="list-group-item">{{list.allocated_room_variable}}         : {{list.allocated_room}}</li>
+				<li class="list-group-item">{{list.instructor_variable}}             : {{list.instructor}}</li>
+				<li class="list-group-item">{{list.description_variable}}            : {{list.description}}</li>
+			</ul>
 			</div>
+			<!-- Button trigger modal -->
+
+  
+
 		</article>
 	</section>
 {% endblock %}

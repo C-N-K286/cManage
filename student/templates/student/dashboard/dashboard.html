@@ -1,6 +1,26 @@
 
     {% extends 'student/dashboard/base.html'%}
     {% load static %}
+
+{% block style %}
+#p2{
+margin-top:-25px !important;
+margin-bottom:-25px !important;
+}
+
+{% endblock %}
+
+
+{% block nav-left %}
+<form class="navbar-form navbar-left" role="search" action="{% url 'student:search' %}" method="post">
+                                    {% csrf_token %}
+                                    <div class="form-group" id="p2">
+                                          <input type="text" class="form-control" name="qname" placeholder="Enter Class Name" id="p3">
+                                    <button class="icon"><i class="fa fa-search"></i></button>
+                                    </div>
+                            </form>
+
+{% endblock %}
 {% block body %}
 <div class="container-fluid">
     <div class="row">
@@ -20,7 +40,7 @@
                         </div>
                     </div>
         </div>
-    </div>
+    </div> 
 </div>
 <!---
         <div class="content">
