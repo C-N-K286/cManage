@@ -27,8 +27,8 @@ margin-bottom:-25px !important;
         <div class="container" id="godown">
                 {% for key,values in list.items %}
                     <div class="thumbnail">
-                       <p id="{key.class_name}}" class="toggle">{{key.class_name}}
-                        <div class="conatiner toggle"   >
+                       <p id="{key.class_name}}" class="toggle">{{key.class_name}}<button type="button" class="btn btn-info" data-toggle="collapse" data-target="#{{key.class_name }}">collapse</button>
+                        <div class="conatiner " id="{{key.class_name}}"   >
                             <ul class="list-group">
                                 {% for j in values %}
                                <a href="/business/sDetails/{{j.student.student_id}}/{{key.class_id}}"> <li class="list-group-item list-group-item-success">{{j.username}}</li></a>
@@ -46,10 +46,5 @@ margin-bottom:-25px !important;
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
         <script type="text/javascript">
-        
-         $("p.toggle").click(function(e){
-            e.preventDefault();
-        $(this).next("div").toggle();
-            });
         </script>
         {% endblock %}
