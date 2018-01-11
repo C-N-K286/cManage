@@ -1,0 +1,58 @@
+{% extends 'business/dashboard/base.html'%}
+{% load static %}
+
+{% block style %}
+#p2{
+margin-top:-25px !important;
+margin-bottom:-25px !important;
+}
+
+#met:hover{
+	background:#D8E2F9;
+	-webkit-transform: scale(1.02);
+            transform: scale(1.02);
+}
+
+{% endblock %}
+
+
+{% block nav-left %}
+<form class="navbar-form navbar-left" role="search" action="{% url 'business:csearch' %}" method="post">
+                                    {% csrf_token %}
+                                    <div class="form-group" id="p2">
+                                          <input type="text" class="form-control" name="qname" placeholder="Enter Class Name" id="p3">
+                                    <button class="icon"><i class="fa fa-search"></i></button>
+                                    </div>
+                            </form>
+
+{% endblock %}
+
+{% block nav %} 
+	<li>
+        <a href="{% url 'business:addClass' %}">
+            <p>Add Class</p>
+        </a>
+    </li>
+{% endblock %}
+{% block body %}	
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+                <div class="">
+                
+                        <div class="container" id='available'>
+                                {% for i in list %}
+                                    <div class="thumbnail well well-lg" id="met">
+                                        <a href="/business/historydetails/{{i.class_id}}"><h3>{{ i.class_name }}</h3></a>
+                                        <h5>{{i.start_date}}</h5>
+                                        <h5>{{i.end_date}}</h5>
+                                    </div>
+                                {% endfor %} 
+                                
+                        </div>
+                    </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

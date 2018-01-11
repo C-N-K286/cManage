@@ -21,7 +21,14 @@ from django.core.mail import EmailMessage
 import json
 from django.core import serializers
 from django.core.serializers.json import DjangoJSONEncoder
+from datetime import date
 
+def available_class():
+    a = Class.objects.filter(active_class=True)
+    for i in a:
+        if date.today() > i.end_date:
+            i.active_class=False
+            i.save()
 
 def checkClass(request,cid):
     cla = Class.objects.get(class_id=cid)
@@ -102,10 +109,30 @@ def mClass(request):
         except:
             return redirect('/business/logout')
         try:
-            cur_list = Class.objects.filter(business_id = cur_id)
+            available_class()   
+            cur_list = Class.objects.filter(business_id = cur_id,active_class=True)
         except:
             cur_list=[]
         return render(request,'business/classes.html',{'list':cur_list})
+
+def completed_class(request):
+    if not request.user.is_authenticated():
+        return redirect('/business/login')
+    else:
+        print "Its working"
+        try:
+            cur_id = request.user.business.business_id
+        except:
+            return redirect('/business/logout')
+        try:
+            available_class()   
+            cur_list = Class.objects.filter(business_id = cur_id,active_class=False)
+        except:
+            cur_list=[]
+        return render(request,'business/completedclasses.html',{'list':cur_list})
+    
+
+
 
 def csearch(request):
     if not request.user.is_authenticated():
@@ -121,7 +148,7 @@ def csearch(request):
             ori = qname.split(" ")
             cur_list = []
             for i in ori:    
-                cur_list += Class.objects.filter(business_id = cur_id,class_name__contains = i)
+                cur_list += Class.objects.filter(business_id = cur_id,class_name__contains = i,active_class=True)
             cur_list = list(set(cur_list))
         except:
             cur_list=[]
@@ -236,6 +263,10 @@ def addClass(request):
             form = ClassForm(request.POST)
             if form.is_valid():
                 obj = form.save(commit=False)
+                if obj.end_date > date.today():
+                    obj.active_class=True
+                else:
+                    obj.active_class=False
                 obj.corse_duration = datetime.timedelta(hours=60)
                 obj.duration = datetime.timedelta(days=10)
                 obj.business_id = Business.objects.get(business_id = request.user.business.business_id)
@@ -254,6 +285,10 @@ def clone(request,cid):
             form = ClassForm(request.POST)
             if form.is_valid():
                 obj = form.save(commit=False)
+                if obj.end_date > date.today():
+                    obj.active_class=True
+                else:
+                    obj.active_class=False
                 obj.corse_duration = datetime.timedelta(hours=60)
                 obj.duration = datetime.timedelta(days=10)
                 obj.business_id = Business.objects.get(business_id = request.user.business.business_id)
@@ -324,6 +359,17 @@ def details(request,cid):
         except:
             logout_user(request)
 
+def history_details(request,cid):
+    if not request.user.is_authenticated():
+        return login_user(request)
+    else:
+        try:
+            print request.user.business.business_id
+            classdetails = Class.objects.get(class_id = cid)
+            return render(request,'business/historydetails.html',{'list':classdetails})
+        except:
+            logout_user(request)
+
 def instructordetails(request,iid):
     if not request.user.is_authenticated():
         return login_user(request)
@@ -372,7 +418,7 @@ def update(request,cid):
                     temp.class_name = name
                 if sdate!= '':
                     temp.start_date = sdate
-                if edate != '':
+                if edate != '': 
                     temp.end_date = edate 
                 if location != '':
                     temp.class_location = location
@@ -399,6 +445,9 @@ def update(request,cid):
                     temp.description_variable = des_vari
 
                 temp.save()
+                if date.today() > temp.end_date:
+                    temp.active_class=False
+                    temp.save()					
                 return render(request,'business/details.html',{'list':temp})			
             else:
                 basic = Class.objects.get( class_id = cid )
@@ -437,7 +486,8 @@ def mStudent(request):
         except:
             return redirect('/business/logout')
         try:
-            cur_list = Class.objects.filter(business_id = cur_id)
+            available_class()
+            cur_list = Class.objects.filter(business_id = cur_id,active_class=True)
             student_list={}
             lis=[]
             for i in cur_list:

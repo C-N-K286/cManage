@@ -15,6 +15,14 @@ from django.template.loader import render_to_string
 from .tokens import account_activation_token
 from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
+from datetime import date
+
+def check_class():
+    act = Class.objects.filter(active_class=True)
+    for i in act:
+        if date.today() > i.end_date:
+            i.active_class=False
+            i.save()			
 
 def dashboard(request):
     if not request.user.is_authenticated():
@@ -22,7 +30,8 @@ def dashboard(request):
     else:
         try:
             print request.user.student.student_id
-            clas = Class.objects.all()
+            check_class()
+            clas = Class.objects.filter(active_class=True)  
             username = request.user.username
             return render(request,'student/dashboard/dashboard.html',{'class':clas,'username':username})
         except:
@@ -142,8 +151,9 @@ def display(request):
     else:
         try:
             print request.user.student.student_id 		
-            enrol = []  
-            c = Class.objects.all()
+            enrol = []
+            check_class() 			
+            c = Class.objects.filter(active_class=True)
             for i in c:
                 for j in i.student.all():
                     if j.student_id == request.user.student.student_id:

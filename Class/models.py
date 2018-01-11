@@ -10,6 +10,7 @@ class Class(models.Model):
     business_id = models.ForeignKey(Business,to_field='business_id',on_delete=models.CASCADE)
     class_id = models.AutoField(primary_key=True)
 
+    active_class = models.BooleanField()   
     class_name = models.CharField(max_length=100,blank=False,null=False,unique=True)
     class_name_variable = models.CharField(max_length=250,default='Class')
 
@@ -34,6 +35,7 @@ class Class(models.Model):
     description = models.TextField()
     description_variable = models.CharField(max_length=100,default='Description')
 
+	
     student = models.ManyToManyField(Student)
     def __str__(self):
         return self.class_name
